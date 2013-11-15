@@ -19,13 +19,17 @@ add_action( 'wp_enqueue_scripts', 'probtn_add_my_stylesheet' );
  */
 function probtn_add_my_stylesheet() {
     // Respects SSL, Style.css is relative to the current file
-    wp_register_style( 'probtn-style', plugins_url('style.css', __FILE__) );
+    wp_register_style( 'probtn-style', 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
     wp_enqueue_style( 'probtn-style' );
 	
-	wp_register_script( 'probtn-script', plugins_url('probtn.js', __FILE__) );
+	wp_register_script( 'probtn-script', 'https://pizzabtn.herokuapp.com/javascripts/probtn.js');
 	wp_enqueue_script( 'probtn-script' );
 	
-	$mainStyleCss = parse_url(plugins_url('style.css', __FILE__));
+	//wp_register_script( 'jquerypep-script', plugins_url('https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js', __FILE__) );
+	wp_register_script( 'jquerypep-script', 'https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js');
+	wp_enqueue_script( 'jquerypep-script' );
+	
+	$mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
 	$jqueryPepPath = parse_url(plugins_url('libs/jquery.pep.min.js', __FILE__));
 	
 	wp_register_script( 'probtn-start-script', plugins_url("start_probtn.php?mainStyleCss=".$mainStyleCss["path"]."&jqueryPepPath=".$jqueryPepPath["path"]."", __FILE__) );
