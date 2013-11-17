@@ -28,9 +28,9 @@ For better usability users can use admin panel with settings and button targetin
 
 == Screenshots ==
 
-1. /assets/screenshot-1.png
-2. /assets/screenshot-2.png
-3. /assets/screenshot-3.png
+1. Button at page
+2. Opened content after clicking on button
+3. Close area when we move button
 
 == Changelog ==
 
