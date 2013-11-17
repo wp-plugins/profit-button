@@ -28,9 +28,9 @@ For better usability users can use admin panel with settings and button targetin
 
 == Screenshots ==
 
-1. example1.png
-2. example2.png
-3. example3.png
+1. `/assets/example1.png`
+2. `/assets/example2.png`
+3. `/assets/example3.png`
 
 == Changelog ==
 
