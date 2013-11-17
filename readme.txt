@@ -26,21 +26,17 @@ For better usability users can use admin panel with settings and button targetin
 
 == Frequently asked questions ==
 
-
-
 == Screenshots ==
 
-1. http://habrastorage.org/storage3/d96/8e3/da6/d968e3da6281a2daf6c3d6f74655df11.png
-2. http://habrastorage.org/storage3/4f8/d56/59a/4f8d5659a67e8df6feb17d58da9c8f0a.png
-3. http://habrastorage.org/storage3/719/7d4/bc8/7197d4bc83cbc6bb2a089052746b0b62.png
+1. example1.png
+2. example2.png
+3. example3.png
 
 == Changelog ==
 
 Added base functionality of floating button.
 
 == Upgrade notice ==
-
-
 
 == Arbitrary section 1 ==
 
