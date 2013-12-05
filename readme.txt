@@ -31,6 +31,7 @@ For better usability users can use admin panel with settings and button targetin
 1. Button at page
 2. Opened content after clicking on button
 3. Close area when we move button
+4. Gif example
 
 == Changelog ==
 
