@@ -1,4 +1,4 @@
-=== Profit Button ===
+=== Floating button ===
 Contributors: hintsolutions
 Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
