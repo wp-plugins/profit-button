@@ -12,12 +12,9 @@ body {
     -ms-touch-action: auto !important;
 }
 
-#pizzabtn_wrapper {
+#pizzabtn, #pizzabtn_wrapper {
     position: fixed !important;
-    z-index: 600 !important;
-}
-#pizzabtn {
-    z-index: 13000 !important;
+    z-index: 11000 !important;
 }
 
 .pizzabtn_button {
@@ -34,7 +31,7 @@ body {
     position: fixed;
     top:  200px;
     left: 400px;
-    z-index: 500 !important;
+    z-index: 4000 !important;
 }
 
 body { 
