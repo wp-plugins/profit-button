@@ -3,7 +3,7 @@
  * Plugin Name: Profit Button
  * Plugin URI: http://probtn.com
  * Description: Profit Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.0
+ * Version: 1.1
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
