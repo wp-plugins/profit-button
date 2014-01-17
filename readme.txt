@@ -28,10 +28,11 @@ For better usability users can use admin panel with settings and button targetin
 
 == Screenshots ==
 
-1. Button at page
-2. Opened content after clicking on button
-3. Close area when we move button
-4. Gif example
+1. Gif example
+2. Button at page
+3. Opened content after clicking on button
+4. Close area when we move button
+
 
 == Changelog ==
 
