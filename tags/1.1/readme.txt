@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1
+Stable tag: 1.2
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -28,16 +28,19 @@ For better usability users can use admin panel with settings and button targetin
 
 == Screenshots ==
 
+4. Gif example
 1. Button at page
 2. Opened content after clicking on button
 3. Close area when we move button
-4. Gif example
+
 
 == Changelog ==
 
 Added base functionality of floating button.
 
 == Upgrade notice ==
+
+Added local settings for button at plugin settings page.
 
 == Arbitrary section 1 ==
 
