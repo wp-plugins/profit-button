@@ -14,22 +14,22 @@ header("content-type: application/javascript");
     }
 ?>
 
-<?php 
+<?php
 if (!isset($_GET['state']) || $_GET['state']=="on" || $_GET['state']=='') {
 ?>
     FloatingButtonFunc();
-<?php 
+<?php
 };
 
 $source = 0; //probtn.com
 if (!isset($_GET['source']) || $_GET['source']=="probtn.com" || $_GET['source']=='') {
-} else {    
+} else {
     $source = 1;
 };
 ?>
 
 function runYourFunctionWhenJQueryIsLoaded() {
-    if (window.$){      
+    if (window.$){
         FloatingButtonFunc();
     } else {
         setTimeout(runYourFunctionWhenJQueryIsLoaded, 50);
@@ -40,28 +40,30 @@ function FloatingButtonFunc() {
     jQuery(document).ready(function() {
 	    jQuery(document).StartButton({
 		    "mainStyleCss": "https://pizzabtn.herokuapp.com/stylesheets/probtn.css",
-		    "jqueryPepPath": "<?php echo $_GET["jqueryPepPath"]; ?>",
-            <?php 
+            <?php
             if ($source==1) {
             ?>
+                "jqueryPepPath": "<?php echo $_GET["jqueryPepPath"]; ?>",
                 <?php echo checkParamExist("ButtonImage","probtn_image") ?>
                 <?php echo checkParamExist("ButtonDragImage","probtn_image") ?>
                 <?php echo checkParamExist("ButtonOpenImage","probtn_image") ?>
-                <?php echo checkParamExist("ButtonInactiveImage","probtn_image") ?>  
-                'domain': 'wordpress.plugin',      
+                <?php echo checkParamExist("ButtonInactiveImage","probtn_image") ?>
+                'domain': 'wordpress.plugin',
                 <?php echo checkParamExist("ContentURL","probtn_contenturl") ?>
-                <?php echo checkParamExist("HintText","probtn_hinttext") ?>    
-            <?php 
-            }; 
+                <?php echo checkParamExist("HintText","probtn_hinttext") ?>
+            <?php
+            } else {
             ?>
-            
-            
+                "jqueryPepPath": "<?php echo $_GET["jqueryPepPath"]; ?>"
+            <?php
+            }
+            ?>
 	    });
     });
 }
 
 /*
 <?php
-  print_r($_GET);  
+  print_r($_GET);
 ?>
 */
