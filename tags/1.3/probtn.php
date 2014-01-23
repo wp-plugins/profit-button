@@ -3,12 +3,12 @@
  * Plugin Name: Profit Button
  * Plugin URI: http://probtn.com
  * Description: Profit Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.2
+ * Version: 1.3
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
  */
- 
+
  /**
  * Register with hook 'wp_enqueue_scripts', which can be used for front end CSS and JavaScript
  */
@@ -21,20 +21,20 @@ function probtn_add_my_stylesheet() {
     // Respects SSL, Style.css is relative to the current file
     wp_register_style( 'probtn-style', 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
     wp_enqueue_style( 'probtn-style' );
-	
+
 	wp_register_script( 'probtn-script', 'https://pizzabtn.herokuapp.com/javascripts/probtn.js', array( 'jquery' ));
     //wp_register_script( 'probtn-script', plugins_url('probtn.js', __FILE__), array( 'jquery' ));
 	wp_enqueue_script( 'probtn-script' );
-	
+
 	//wp_register_script( 'jquerypep-script', plugins_url('https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js', __FILE__) );
 	wp_register_script( 'jquerypep-script', 'https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js', array( 'jquery' ));
 	wp_enqueue_script( 'jquerypep-script' );
-	
+
 	$mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
 	//$jqueryPepPath = parse_url(plugins_url('libs/jquery.pep.min.js', __FILE__));
     $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
-	
-    $options = get_option( 'probtn_settings' ); 
+
+    $options = get_option( 'probtn_settings' );
 
     function urlify($key, $val) {
         return urlencode($key) . '=' . urlencode($val);
@@ -61,7 +61,7 @@ function probtn_settings_validate($args){
     //if(!isset($args['probtn_email']) || !is_email($args['probtn_email'])){
         //add a settings error because the email is invalid and make the form field blank, so that the user can enter again
         //$args['probtn_email'] = '';
-        //add_settings_error('probtn_settings', 'probtn_invalid_email', 'Please enter a valid email!', $type = 'error');   
+        //add_settings_error('probtn_settings', 'probtn_invalid_email', 'Please enter a valid email!', $type = 'error');
     //}
     //make sure you return the args
     return $args;
@@ -71,9 +71,9 @@ function probtn_settings_validate($args){
 add_action( 'admin_menu', 'probtn_menu' );
 
 /** Step 1. */
-function probtn_menu() {    
-    add_menu_page( 'Floating Button', 'Floating Button', 'manage_options', 'profit_button_page', 
-    'probtn_options', plugins_url( 'profit-button/images/profit_button_icon_3_1.png' ), 166 ); 
+function probtn_menu() {
+    add_menu_page( 'Floating Button', 'Floating Button', 'manage_options', 'profit_button_page',
+    'probtn_options', plugins_url( 'profit-button/images/profit_button_icon_3_1.png' ), 166 );
 }
 
 add_action('admin_notices', 'probtn_admin_notices');
@@ -94,7 +94,7 @@ function probtn_options() {
     #wpfooter {
         display: none;
     }
-    
+
     .mp6-sg-example {
 	padding: 1em;
 	margin: 10px 0 20px;
@@ -186,11 +186,11 @@ ul#icons span.ui-icon {
 	<div class="wrap">
 	<div style="clear: both; width: 95%; display: inline-block;
 	height: 110px;">
-		<img alt="logo" style="width: 100px; height: auto; display: inline-block; float: left;" 
+		<img alt="logo" style="width: 100px; height: auto; display: inline-block; float: left;"
 			src="<?php echo plugins_url('/profit-button/images/logo.png'); ?>"/>
 		<h1 style="line-height: 70px; margin-left: 20px; display: inline-block;width: auto;">Floating Button</h1>
 	</div>
-	
+
 
     <div class="mp6-sg-example">
 		<h3>Button settings</h3>
@@ -199,7 +199,7 @@ ul#icons span.ui-icon {
         do_settings_sections( __FILE__ );
 
         //get the older values, wont work the first time
-        $options = get_option( 'probtn_settings' ); 
+        $options = get_option( 'probtn_settings' );
         if (($options['source']==null) || ($options['source']=='')) {
             $options['source'] = 'probtn.com';
         };
@@ -225,15 +225,15 @@ ul#icons span.ui-icon {
                 <th scope="row">Button state</th>
                 <td>
                     <fieldset>
-                        <label>                          
+                        <label>
                             <input type="radio" name="probtn_settings[state]" class=""
                                 value="on"<?php checked( 'on' == $options['state'] ); ?> />
                             <span class="localSettings_item description">On</span>
                         </label>
                         <br/>
-                        <label>                          
+                        <label>
                             <input type="radio" name="probtn_settings[state]" class=""
-                                value="off"<?php checked( 'off' == $options['state'] ); ?> />                            
+                                value="off"<?php checked( 'off' == $options['state'] ); ?> />
                             <span class="description probtnSettings_item">Off</span>
                         </label>
                     </fieldset>
@@ -244,15 +244,15 @@ ul#icons span.ui-icon {
                 <th scope="row">Button settings source</th>
                 <td>
                     <fieldset>
-                        <label>                          
+                        <label>
                             <input type="radio" name="probtn_settings[source]" class="localSettings_item"
                                 value="local settings"<?php checked( 'local settings' == $options['source'] ); ?> />
                             <span class="localSettings_item description">Local settings</span>
                         </label>
                         <br/>
-                        <label>                          
+                        <label>
                             <input type="radio" name="probtn_settings[source]" class="probtnSettings_item"
-                                value="probtn.com"<?php checked( 'probtn.com' == $options['source'] ); ?> />                            
+                                value="probtn.com"<?php checked( 'probtn.com' == $options['source'] ); ?> />
                             <span class="description probtnSettings_item">Settings from probtn.com</span>
                         </label>
                     </fieldset>
@@ -264,22 +264,22 @@ ul#icons span.ui-icon {
                 <td>
                     <fieldset>
                         <label>
-                            <input name="probtn_settings[probtn_contenturl]" type="text" id="probtn_contenturl" 
+                            <input name="probtn_settings[probtn_contenturl]" type="text" id="probtn_contenturl"
                             value="<?php echo (isset($options['probtn_contenturl']) && $options['probtn_contenturl'] != '') ? $options['probtn_contenturl'] : ''; ?>"/>
                             <br />
                             <span class="description">Please enter content url.</span>
                         </label>
                     </fieldset>
                 </td>
-            </tr>     
-            
+            </tr>
+
 
             <tr class="localSettings">
                 <th scope="row">Hint Text</th>
                 <td>
                     <fieldset>
                         <label>
-                            <input name="probtn_settings[probtn_hinttext]" type="text" id="probtn_hinttext" 
+                            <input name="probtn_settings[probtn_hinttext]" type="text" id="probtn_hinttext"
                             value="<?php echo (isset($options['probtn_hinttext']) && $options['probtn_hinttext'] != '') ? $options['probtn_hinttext'] : ''; ?>"/>
                             <br />
                             <span class="description">Please enter button hint text.</span>
@@ -315,7 +315,7 @@ ul#icons span.ui-icon {
                                         or
                                         &nbsp;&nbsp;
                                         <label class="radio inline">
-                                            <input id="customImageRadioButton" onclick="jQuery('#customImageRadioButton').val(jQuery('#custom_image_text').val());" name="probtn_settings[probtn_image]"  
+                                            <input id="customImageRadioButton" onclick="jQuery('#customImageRadioButton').val(jQuery('#custom_image_text').val());" name="probtn_settings[probtn_image]"
                                             type="radio" name="button_image_radio" value="<?php echo (isset($options['probtn_custom_image']) && $options['probtn_custom_image'] != '') ? $options['probtn_custom_image'] : ''; ?>"<?php checked( $options['probtn_custom_image'] == $options['probtn_image'] ); ?>>
                                         </label>
                                         &nbsp;&nbsp;
@@ -328,7 +328,7 @@ ul#icons span.ui-icon {
         <input type="submit" value="Save settings" class="button-primary" />
     </form>
     </div>
-	
+
 	<script src='https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js'></script>
 	<script src='https://pizzabtn.herokuapp.com/javascripts/jquery.fancybox.js'></script>
 	<script src='https://pizzabtn.herokuapp.com/javascripts/probtn.js'></script>
@@ -358,7 +358,7 @@ ul#icons span.ui-icon {
 
     <div class="mp6-sg-example" id="">
 		<h3>Setup</h3>
-	    <a style="margin: 0 auto; text-align: center;" href="http://bit.ly/profitbutton-wordpress" target="_blank"><button>Sign up</button></a><br/>	
+	    <a style="margin: 0 auto; text-align: center;" href="http://bit.ly/profitbutton-wordpress" target="_blank"><button>Sign up</button></a><br/>
         <p>First of all you should open <a href="http://bit.ly/profitbutton-wordpress" target="_blank">http://admin.probtn.com</a> and enter (or sign up if you havn't account).</p>
 	    <img alt="step1" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step1.png'); ?>"/>
 	    <p>After your sign in, you can see "create" button in left sidebar.</p>
@@ -372,7 +372,7 @@ ul#icons span.ui-icon {
 	</div>
 
 
-	
+
 <!--<div id="dashboard-widgets-container" class="ngg-overview">
 		    <div id="dashboard-widgets" class="metabox-holder">
 				<div id="post-body">
@@ -397,7 +397,7 @@ ul#icons span.ui-icon {
 	<a style="margin: 0 auto; text-align: center;" href="http://bit.ly/profitbutton-wordpress" target="_blank">
 		<button>Sign up</button>
 	</a><br/>
-	
+
 <p>First of all you should open <a href="http://bit.ly/profitbutton-wordpress" target="_blank">http://admin.probtn.com</a> and enter (or sign up if you havn't account).</p>
 	<img alt="step1" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step1.png'); ?>"/>
 	<p>After your sign in, you can see "create" button in left sidebar.</p>
@@ -433,9 +433,9 @@ ul#icons span.ui-icon {
 </div>
 </div>
 </div>-->
-	
+
 </div>
-	
-<?php 
+
+<?php
 }
 ?>
