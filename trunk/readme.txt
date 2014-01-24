@@ -26,11 +26,14 @@ For better usability users can use admin panel with settings and button targetin
 
 == FAQ ==
 
-(1) How can I use Local Settings?
+**How can I use Local Settings?**
+
 Local Settings source allows you to create a basic Floating button without the need to create an account on admin.probtn.com.
 Settings will be saved locally in Wordpress. In this mode available settings include Content URL, Hint Text and Button Image.
 
-(2) How to change Content Size?
+
+**How to change Content Size?**
+
 You can change Content Size only if you are using probtn.com as Button settings source
 and you have already created an account and application on admin.probtn.com
 Open your application and scroll down to Button Settings box.
