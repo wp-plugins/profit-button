@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.4
+Stable tag: 1.5
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -62,6 +62,7 @@ There you find Content Size W(idth) and H(eight) settings. These values are set 
 == Changelog ==
 
 Added base functionality of floating button.
+Add account registration on probtn.com
 
 == Upgrade notice ==
 
