@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.2
+Stable tag: 1.5
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -24,7 +24,32 @@ For better usability users can use admin panel with settings and button targetin
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Register or login at http://admin.probtn.com/ and add your site in apps list, to get opportunity to set params for floating button.
 
+== FAQ ==
+
+**How can I use Local Settings?**
+
+Local Settings source allows you to create a basic Floating button without the need to create an account on admin.probtn.com.
+Settings will be saved locally in Wordpress. In this mode available settings include Content URL, Hint Text and Button Image.
+
+
+**How to change Content Size?**
+
+You can change Content Size only if you are using probtn.com as Button settings source
+and you have already created an account and application on admin.probtn.com
+Open your application and scroll down to Button Settings box.
+There you find Content Size W(idth) and H(eight) settings. These values are set in pixels.
+
 == Frequently asked questions ==
+
+(1) How can I use Local Settings?
+Local Settings source allows you to create a basic Floating button without the need to create an account on admin.probtn.com.
+Settings will be saved locally in Wordpress. In this mode available settings include Content URL, Hint Text and Button Image.
+
+(2) How to change Content Size?
+You can change Content Size only if you are using probtn.com as Button settings source
+and you have already created an account and application on admin.probtn.com
+Open your application and scroll down to Button Settings box.
+There you find Content Size W(idth) and H(eight) settings. These values are set in pixels.
 
 == Screenshots ==
 
@@ -37,6 +62,7 @@ For better usability users can use admin panel with settings and button targetin
 == Changelog ==
 
 Added base functionality of floating button.
+Add account registration on probtn.com
 
 == Upgrade notice ==
 
