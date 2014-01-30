@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Profit Button
+ * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
- * Description: Profit Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.5
+ * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
+ * Version: 1.6
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -32,7 +32,7 @@ function probtn_add_my_stylesheet() {
 
     $mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
     //$jqueryPepPath = parse_url(plugins_url('libs/jquery.pep.min.js', __FILE__));
-    $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
+    $jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
 
     $options = get_option( 'probtn_settings' );
 
@@ -185,95 +185,27 @@ ul#icons span.ui-icon {
 } /* fixed doesn't actually work? */
 </style>
 
-    <div class="wrap">
+<div class="wrap">
     <div style="clear: both; width: 95%; display: inline-block;
     height: 110px;">
         <img alt="logo" style="width: 100px; height: auto; display: inline-block; float: left;"
-            src="<?php echo plugins_url('/profit-button/images/logo.png'); ?>"/>
+            src="<?php echo plugins_url('/profit-button/images/probtnlogo-2.png'); ?>"/>
         <h1 style="line-height: 70px; margin-left: 20px; display: inline-block;width: auto;">Floating Button</h1>
     </div>
 
-
     <div class="mp6-sg-example">
-        <h3>Button settings</h3>
-        <script>
-            jQuery("#main_settings").ajaxForm({
-                success: function (responseText, statusText, xhr, $form) {
-                    console.log("success");
-                    console.dir(responseText);
-                    if (responseText.result.app_id != null) {
-                        alert("Data saved.");
-                    } else {
-                        alert("Error.");
-                    }
-                },
-                error: function () { console.log("error"); },
-                dataType: 'jsonp',
-                url: 'http://admin.probtn.com/1/functions/createApp',
-                type: 'post'
-            })
-        </script>
-    <form id="main_settings" action="http://admin.probtn.com/1/functions/createApp" method="post"><?php
-        global $current_user;
-        get_currentuserinfo();
-        ?>
-        <table class="form-table">
-            <tr class="">
-                <th scope="row">Email</th>
-                <td>
-                    <fieldset>
-                        <label>
-                            <input name="user_email" type="text" id="user_email"
-                            value="<?php echo $current_user->user_email; ?>" placeholder="<?php echo $current_user->user_email; ?>"/>
-                            <br />
-                            <span class="description">Please enter your email.</span>
-                        </label>
-                    </fieldset>
-                </td>
-            </tr>
+        <h3>About</h3>
+        <p>
+        Floating button is a new way to add survey, ads or some other additional content without adding any changes to your design.<br/>
+        Functionality is implemented like floating button above your site, and after clicking on button would be opened additional modal window with nessesary content.<br/>
+        For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.
+        </p>
+    </div>
 
-            <tr class="">
-                <th scope="row">Image URL</th>
-                <td>
-                    <fieldset>
-                        <label>
-                            <input name="settings_pic" type="text" id="settings_pic"
-                            value="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png" placeholder="http://example.com/example.png"/>
-                            <br />
-                            <span class="description">Please enter button image.</span>
-                        </label>
-                    </fieldset>
-                </td>
-            </tr>
-
-            <tr class="">
-                <th scope="row">Content URL</th>
-                <td>
-                    <fieldset>
-                        <label>
-                            <input name="tool_url" type="text" id="tool_url"
-                            value="" placeholder="http://probtn.com"/>
-                            <br />
-                            <span class="description">Please enter content url.</span>
-                        </label>
-                    </fieldset>
-                </td>
-            </tr>
-        </table>
+    <!-- START SETTINGS MENU -->
+    <div class="mp6-sg-example">
+        <h3>Settings</h3>
         <!--
-app_name*=имя аппа
-app_bundle_id*=BundleID
-        -->
-        <input type="hidden" value="b04bb84b22cdacb0d57fd8f8fd3bfeb8ad430d1b" name="X-ProBtn-Token"/>
-        <input type="hidden" value="<?php echo $_SERVER['SERVER_NAME']; ?>" name="app_name"/>
-        <input type="hidden" value="web" name="app_platform"/>
-        <input type="hidden" value="<?php echo $_SERVER['SERVER_NAME']; ?>" name="app_bundle_id"/>
-        <input type="submit" value="Save settings" class="button-primary" />
-    </form>
-
-
-    <br/><br/>
-    <h3 style="cursor:  pointer;" id="expert_settings_toggle">Expert settings</h3>
         <script>
             jQuery(document).ready(
             function ($) {
@@ -283,254 +215,335 @@ app_bundle_id*=BundleID
                 });
             });
         </script>
+        -->
+        <div id="options">
+            <form action="options.php" method="post">
+            <?php
+                settings_fields( 'probtn_settings' );
+                do_settings_sections( __FILE__ );
 
+                //get the older values, wont work the first time
+                $options = get_option( 'probtn_settings' );
+                if (($options['source']==null) || ($options['source']=='')) {
+                    $options['source'] = 'probtn.com';
+                };
 
-    <div id="expert_settings" style="">
-    <form action="options.php" method="post">
-    <?php
-        settings_fields( 'probtn_settings' );
-        do_settings_sections( __FILE__ );
+                if (($options['state']==null) || ($options['state']=='')) {
+                    $options['state'] = 'on';
+                };
 
-        //get the older values, wont work the first time
-        $options = get_option( 'probtn_settings' );
-        if (($options['source']==null) || ($options['source']=='')) {
-            $options['source'] = 'probtn.com';
-        };
+                if ($options['source'] == 'probtn.com') {
+                ?>
+                <script>
+                    jQuery(document).ready(
+                    function ($) {
+                        $(".localSettings").hide();
+                        $("#probtnSettings").show();
+                    });
+                </script>
+                <?php
+                };
+                ?>
+                <table class="form-table">
+                    <tr>
+                        <th scope="row">Button state</th>
+                        <td>
+                            <fieldset>
+                                <label>
+                                    <input type="radio" name="probtn_settings[state]" class=""
+                                        value="on"<?php checked( 'on' == $options['state'] ); ?> />
+                                    <span class="localSettings_item description">On</span>
+                                </label>
+                                <br/>
+                                <label>
+                                    <input type="radio" name="probtn_settings[state]" class=""
+                                        value="off"<?php checked( 'off' == $options['state'] ); ?> />
+                                    <span class="description probtnSettings_item">Off</span>
+                                </label>
+                            </fieldset>
+                        </td>
+                    </tr>
 
-        if (($options['state']==null) || ($options['state']=='')) {
-            $options['state'] = 'on';
-        };
+                    <tr>
+                        <th scope="row">Settings source</th>
+                        <td>
+                            <fieldset>
+                                <label>
+                                    <input type="radio" name="probtn_settings[source]" class="localSettings_item"
+                                        value="local settings"<?php checked( 'local settings' == $options['source'] ); ?> />
+                                    <span class="localSettings_item description">Local settings</span>
+                                </label>
+                                <br/>
+                                <p>Settings will be stored locally. Only basic ones are available.</p>
+                                <label>
+                                    <input type="radio" name="probtn_settings[source]" class="probtnSettings_item"
+                                        value="probtn.com"<?php checked( 'probtn.com' == $options['source'] ); ?> />
+                                    <span class="description probtnSettings_item">Settings from probtn.com</span>
+                                </label>
+                                <p>Settings will be stored in the cloud.</p>
+                            </fieldset>
+                        </td>
+                    </tr>
 
-        if ($options['source'] == 'probtn.com') {
-        ?>
-        <script>
-            jQuery(document).ready(
-            function ($) {
-                $("#expert_settings").hide();
-                $(".localSettings").hide();
-            });
-        </script>
-        <?php
-        };
-        ?>
-        <table class="form-table">
+                    <tr class="localSettings">
+                        <th scope="row">Content URL</th>
+                        <td>
+                            <fieldset>
+                                <label>
+                                    <input name="probtn_settings[probtn_contenturl]" type="text" id="probtn_contenturl"
+                                    value="<?php echo (isset($options['probtn_contenturl']) && $options['probtn_contenturl'] != '') ? $options['probtn_contenturl'] : ''; ?>"/>
+                                    <br />
+                                    <span class="description">Please enter content url.</span>
+                                </label>
+                            </fieldset>
+                        </td>
+                    </tr>
 
-            <tr>
-                <th scope="row">Button state</th>
-                <td>
-                    <fieldset>
-                        <label>
-                            <input type="radio" name="probtn_settings[state]" class=""
-                                value="on"<?php checked( 'on' == $options['state'] ); ?> />
-                            <span class="localSettings_item description">On</span>
-                        </label>
-                        <br/>
-                        <label>
-                            <input type="radio" name="probtn_settings[state]" class=""
-                                value="off"<?php checked( 'off' == $options['state'] ); ?> />
-                            <span class="description probtnSettings_item">Off</span>
-                        </label>
-                    </fieldset>
-                </td>
-            </tr>
+                    <tr class="localSettings">
+                        <th scope="row">Hint Text</th>
+                        <td>
+                            <fieldset>
+                                <label>
+                                    <input name="probtn_settings[probtn_hinttext]" type="text" id="probtn_hinttext"
+                                    value="<?php echo (isset($options['probtn_hinttext']) && $options['probtn_hinttext'] != '') ? $options['probtn_hinttext'] : ''; ?>"/>
+                                    <br />
+                                    <span class="description">Please enter button hint text.</span>
+                                </label>
+                            </fieldset>
+                        </td>
+                    </tr>
 
-            <tr>
-                <th scope="row">Button settings source</th>
-                <td>
-                    <fieldset>
-                        <label>
-                            <input type="radio" name="probtn_settings[source]" class="localSettings_item"
-                                value="local settings"<?php checked( 'local settings' == $options['source'] ); ?> />
-                            <span class="localSettings_item description">Local settings</span>
-                        </label>
-                        <br/>
-                        <label>
-                            <input type="radio" name="probtn_settings[source]" class="probtnSettings_item"
-                                value="probtn.com"<?php checked( 'probtn.com' == $options['source'] ); ?> />
-                            <span class="description probtnSettings_item">Settings from probtn.com</span>
-                        </label>
-                    </fieldset>
-                </td>
-            </tr>
-
-            <tr class="localSettings">
-                <th scope="row">Content url</th>
-                <td>
-                    <fieldset>
-                        <label>
-                            <input name="probtn_settings[probtn_contenturl]" type="text" id="probtn_contenturl"
-                            value="<?php echo (isset($options['probtn_contenturl']) && $options['probtn_contenturl'] != '') ? $options['probtn_contenturl'] : ''; ?>"/>
-                            <br />
-                            <span class="description">Please enter content url.</span>
-                        </label>
-                    </fieldset>
-                </td>
-            </tr>
-
-
-            <tr class="localSettings">
-                <th scope="row">Hint Text</th>
-                <td>
-                    <fieldset>
-                        <label>
-                            <input name="probtn_settings[probtn_hinttext]" type="text" id="probtn_hinttext"
-                            value="<?php echo (isset($options['probtn_hinttext']) && $options['probtn_hinttext'] != '') ? $options['probtn_hinttext'] : ''; ?>"/>
-                            <br />
-                            <span class="description">Please enter button hint text.</span>
-                        </label>
-                    </fieldset>
-                </td>
-            </tr>
-
-            <tr class="localSettings">
-                <th scope="row">Button image</th>
-                <td>
-            <div class="controls">
-                                        <label class="radio inline">
-                                            <input type="radio" name="probtn_settings[probtn_image]" value="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png"<?php checked( 'http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png' == $options['probtn_image'] ); ?>/>
-                                        </label>
-                                        <img alt="cart button" src="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png" width="50">
-                                        &nbsp;&nbsp;
-                                        <label class="radio inline">
-                                            <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png"<?php checked( 'http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png' == $options['probtn_image'] ); ?>/>
-                                        </label>
-                                        <img alt="grey button" src="http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png" width="50">
-                                        &nbsp;&nbsp;
-                                        <label class="radio inline">
-                                            <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png"<?php checked( 'http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png' == $options['probtn_image'] ); ?>/>
-                                        </label>
-                                        <img alt="pizza button" src="http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png" width="50">
-                                        &nbsp;&nbsp;
-                                        <label class="radio inline">
-                                            <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://admin.probtn.com/eqwid_btn_nonpress.png"<?php checked( 'http://admin.probtn.com/eqwid_btn_nonpress.png' == $options['probtn_image'] ); ?>/>
-                                        </label>
-                                        <img alt="eqwid" src="http://admin.probtn.com/eqwid_btn_nonpress.png" width="50">
-                                        &nbsp;&nbsp;
-                                        or
-                                        &nbsp;&nbsp;
-                                        <label class="radio inline">
-                                            <input id="customImageRadioButton" onclick="jQuery('#customImageRadioButton').val(jQuery('#custom_image_text').val());" name="probtn_settings[probtn_image]"
-                                            type="radio" name="button_image_radio" value="<?php echo (isset($options['probtn_custom_image']) && $options['probtn_custom_image'] != '') ? $options['probtn_custom_image'] : ''; ?>"<?php checked( $options['probtn_custom_image'] == $options['probtn_image'] ); ?>>
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <input onclick="" type="text" id="custom_image_text" name="probtn_settings[probtn_custom_image]" placeholder="Your image URL" value="<?php echo (isset($options['probtn_custom_image']) && $options['probtn_custom_image'] != '') ? $options['probtn_custom_image'] : ''; ?>">
-                                    </div>
-                    </td>
-                </tr>
-
-        </table>
-        <input type="submit" value="Save settings" class="button-primary" />
-    </form>
+                    <tr class="localSettings">
+                        <th scope="row">Button Image</th>
+                        <td>
+                            <div class="controls">
+                                <label class="radio inline">
+                                    <input type="radio" name="probtn_settings[probtn_image]" value="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png"<?php checked( 'http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png' == $options['probtn_image'] ); ?>/>
+                                </label>
+                                <img alt="cart button" src="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png" width="50">
+                                &nbsp;&nbsp;
+                                <label class="radio inline">
+                                    <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png"<?php checked( 'http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png' == $options['probtn_image'] ); ?>/>
+                                </label>
+                                <img alt="grey button" src="http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png" width="50">
+                                &nbsp;&nbsp;
+                                <label class="radio inline">
+                                    <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png"<?php checked( 'http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png' == $options['probtn_image'] ); ?>/>
+                                </label>
+                                <img alt="pizza button" src="http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png" width="50">
+                                &nbsp;&nbsp;
+                                <label class="radio inline">
+                                    <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://admin.probtn.com/eqwid_btn_nonpress.png"<?php checked( 'http://admin.probtn.com/eqwid_btn_nonpress.png' == $options['probtn_image'] ); ?>/>
+                                </label>
+                                <img alt="eqwid" src="http://admin.probtn.com/eqwid_btn_nonpress.png" width="50">
+                                &nbsp;&nbsp;
+                                or
+                                &nbsp;&nbsp;
+                                <label class="radio inline">
+                                    <input id="customImageRadioButton" onclick="jQuery('#customImageRadioButton').val(jQuery('#custom_image_text').val());" name="probtn_settings[probtn_image]"
+                                    type="radio" name="button_image_radio" value="<?php echo (isset($options['probtn_custom_image']) && $options['probtn_custom_image'] != '') ? $options['probtn_custom_image'] : ''; ?>"<?php checked( $options['probtn_custom_image'] == $options['probtn_image'] ); ?>>
+                                </label>
+                                &nbsp;&nbsp;
+                                <input onclick="" type="text" id="custom_image_text" name="probtn_settings[probtn_custom_image]" placeholder="Your image URL" value="<?php echo (isset($options['probtn_custom_image']) && $options['probtn_custom_image'] != '') ? $options['probtn_custom_image'] : ''; ?>">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Save settings" class="button-primary" />
+            </form>
         </div>
     </div>
+    <!-- END SETTINGS MENU -->
 
+    <!-- START LAUNCH DEMO BUTTON -->
     <script src='https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js'></script>
     <script src='https://pizzabtn.herokuapp.com/javascripts/jquery.fancybox.js'></script>
     <script src='https://pizzabtn.herokuapp.com/javascripts/probtn.js'></script>
     <script>
-     jQuery(document).ready(
-         function ($) {
-             $(".probtnSettings_item").click(function () {
-                 $(".localSettings").hide(200);
-             });
-             $(".localSettings_item").click(function () {
-                 $(".localSettings").show(200);
-             });
-             $(document).StartButton(
-             {
-             'domain': 'example.com',
-             'mainStyleCss':'https://pizzabtn.herokuapp.com/stylesheets/probtn.css'
-             });
-         });
+        jQuery(document).ready(
+        function ($) {
+            $(".probtnSettings_item").click(function () {
+                $(".localSettings").hide(200);
+                $("#probtnSettings").show(200);
+            });
+            $(".localSettings_item").click(function () {
+                $(".localSettings").show(200);
+                $("#probtnSettings").hide(200);
+            });
+            $(document).StartButton({
+                'domain': 'example.com',
+                'mainStyleCss':'https://pizzabtn.herokuapp.com/stylesheets/probtn.css'
+            });
+        });
     </script>
+    <!-- END LAUNCH DEMO BUTTON -->
 
-    <div class="mp6-sg-example">
-        <h3>About</h3>
-        <p>Profit button is a new way to add survey, ads or some other additional content without adding any changes to your design.</p>
-        <p>Functionality is implemented like floating button above your site, and after clicking on button would be opened additional modal window with nessesary content.</p>
-        <p>For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.</p>
+    <!-- START PROBTN SETTINGS -->
+    <div id="probtnSettings" style="display: none;">
+        <!-- START QUICK ACCOUNT -->
+        <h3 style="cursor: pointer;" id="quick_account_toggle">Quick account <small>&#9650;</small></h3>
+        <p>Automatically creates and updates an account on probtn.com. Only basic settings will be available.</p>
+        <script>
+            jQuery(document).ready(
+            function ($) {
+                $("#quick_account_toggle").click(function () {
+                    $("#quick_account").toggle({
+                        duration: 200,
+                        done: function () {
+                            if ($("#quick_account").is(":hidden"))
+                            {
+                                $("#quick_account_toggle").html("Quick account <small>&#9650;</small>");
+                            }
+                            else
+                            {
+                                $("#quick_account_toggle").html("Quick account <small>&#9660;</small>");
+                            }
+                        }
+                    });
+                    $("#setup_tutorial").toggle({
+                        duration: 200,
+                        done: function () {
+                            if ($("#setup_tutorial").is(":hidden"))
+                            {
+                                $("#setup_tutorial_toggle").html("Full account <small>&#9650;</small>");
+                            }
+                            else
+                            {
+                                $("#setup_tutorial_toggle").html("Full account <small>&#9660;</small>");
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
+            jQuery("#quick_account").ajaxForm({
+                success: function (responseText, statusText, xhr, $form) {
+                    console.log("success");
+                    console.dir(responseText);
+                    if (responseText.result && responseText.result.app_id != null) {
+                        alert("Data saved.");
+                    } else {
+                        alert("Error.");
+                    }
+                },
+                error: function () { console.log("error"); },
+                dataType: 'jsonp',
+                url: 'http://admin.probtn.com/1/functions/createApp',
+                type: 'post'
+            });
+        </script>
+        <form id="quick_account" action="http://admin.probtn.com/1/functions/createApp" method="post"><?php
+            global $current_user;
+            get_currentuserinfo();
+            ?>
+            <table class="form-table">
+                <tr class="">
+                    <th scope="row">Email</th>
+                    <td>
+                        <fieldset>
+                            <label>
+                                <input required="required" name="user_email" type="text" id="user_email"
+                                value="<?php echo $current_user->user_email; ?>" placeholder="<?php echo $current_user->user_email; ?>"/>
+                                <br />
+                                <span class="description">Please enter your email.</span>
+                            </label>
+                        </fieldset>
+                    </td>
+                </tr>
+
+                <tr class="">
+                    <th scope="row">Image URL</th>
+                    <td>
+                        <fieldset>
+                            <label>
+                                <input required="required" name="settings_pic" type="text" id="settings_pic"
+                                value="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png" placeholder="http://example.com/example.png"/>
+                                <br />
+                                <span class="description">Please enter button image.</span>
+                            </label>
+                        </fieldset>
+                    </td>
+                </tr>
+
+                <tr class="">
+                    <th scope="row">Content URL</th>
+                    <td>
+                        <fieldset>
+                            <label>
+                                <input required="required" name="tool_url" type="text" id="tool_url"
+                                value="" placeholder="http://probtn.com"/>
+                                <br />
+                                <span class="description">Please enter content url.</span>
+                            </label>
+                        </fieldset>
+                    </td>
+                </tr>
+            </table>
+            <!--
+                app_name*=имя аппа
+                app_bundle_id*=BundleID
+            -->
+            <input type="hidden" value="b04bb84b22cdacb0d57fd8f8fd3bfeb8ad430d1b" name="X-ProBtn-Token"/>
+            <input type="hidden" value="<?php echo $_SERVER['SERVER_NAME']; ?>" name="app_name"/>
+            <input type="hidden" value="web" name="app_platform"/>
+            <input type="hidden" value="<?php echo $_SERVER['SERVER_NAME']; ?>" name="app_bundle_id"/>
+            <input type="submit" value="Save settings" class="button-primary" />
+        </form>
+        <!-- END QUICK ACCOUNT -->
+
+        <!-- START SETUP TUTORIAL -->
+        <h3 style="cursor: pointer;" id="setup_tutorial_toggle">Full account <small>&#9660;</small></h3>
+        <p>Manually create a full account. All features are available, but managable via probtn.com</p>
+        <script>
+            jQuery(document).ready(
+            function ($) {
+                $("#setup_tutorial_toggle").click(function () {
+                    $("#quick_account").toggle({
+                        duration: 200,
+                        done: function () {
+                            if ($("#quick_account").is(":hidden"))
+                            {
+                                $("#quick_account_toggle").html("Quick account <small>&#9650;</small>");
+                            }
+                            else
+                            {
+                                $("#quick_account_toggle").html("Quick account <small>&#9660;</small>");
+                            }
+                        }
+                    });
+                    $("#setup_tutorial").toggle({
+                        duration: 200,
+                        done: function () {
+                            if ($("#setup_tutorial").is(":hidden"))
+                            {
+                                $("#setup_tutorial_toggle").html("Full account <small>&#9650;</small>");
+                            }
+                            else
+                            {
+                                $("#setup_tutorial_toggle").html("Full account <small>&#9660;</small>");
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+        <div class="mp6-sg-example" id="setup_tutorial" style="display: none;">
+            <a style="margin: 0 auto; text-align: center;" href="http://bit.ly/profitbutton-wordpress" target="_blank"><button>Sign up</button></a><br/>
+            <p>First of all you should open <a href="http://bit.ly/profitbutton-wordpress" target="_blank">http://admin.probtn.com</a> and enter (or sign up if you havn't account).</p>
+            <img alt="step1" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step1.png'); ?>"/>
+            <p>After your sign in, you can see "create" button in left sidebar.</p>
+            <img alt="step2" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step2.png'); ?>"/>
+            <p></p>
+            <img alt="step3" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step3.png'); ?>"/>
+            <img alt="step4" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step4.png'); ?>"/>
+            <img alt="step5" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step5.png'); ?>"/>
+        </div>
+        <!-- END SETUP TUTORIAL -->
     </div>
-
-    <div class="mp6-sg-example" id="setup_tutorial" style="display: none;">
-        <h3>Setup</h3>
-        <a style="margin: 0 auto; text-align: center;" href="http://bit.ly/profitbutton-wordpress" target="_blank"><button>Sign up</button></a><br/>
-        <p>First of all you should open <a href="http://bit.ly/profitbutton-wordpress" target="_blank">http://admin.probtn.com</a> and enter (or sign up if you havn't account).</p>
-        <img alt="step1" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step1.png'); ?>"/>
-        <p>After your sign in, you can see "create" button in left sidebar.</p>
-        <img alt="step2" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step2.png'); ?>"/>
-        <p></p>
-        <img alt="step3" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step3.png'); ?>"/>
-        <img alt="step4" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step4.png'); ?>"/>
-        <img alt="step5" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step5.png'); ?>"/>
-    </div>
-
-    </div>
-
-
-
-<!--<div id="dashboard-widgets-container" class="ngg-overview">
-            <div id="dashboard-widgets" class="metabox-holder">
-                <div id="post-body">
-                    <div id="dashboard-widgets-main-content">
-
-<div class="postbox-container" id="main-container" style="width:75%;">
-<div id="left-sortables" class="meta-box-sortables ui-sortable">
-<div id="dashboard_right_now" class="postbox ">
-<div class="handlediv" title="Нажмите, чтобы переключить"><br></div>
-<h3 class="hndle"><span>About</span></h3>
-<div class="inside" style="padding-top: 0px !important;">
-<p>Profit button is a new way to add survey, ads or some other additional content without adding any changes to your design.</p>
-    <p>Functionality is implemented like floating button above your site, and after clicking on button would be opened additional modal window with nessesary content.</p>
-    <p>For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.</p>
+    <!-- END PROBTN SETTINGS -->
 </div>
-</div>
-
-<div id="dashboard_right_now" class="postbox ">
-<div class="handlediv" title="Нажмите, чтобы переключить"><br></div>
-<h3 class="hndle"><span>Setup</span></h3>
-<div class="inside" style="padding-top: 0px !important;">
-    <a style="margin: 0 auto; text-align: center;" href="http://bit.ly/profitbutton-wordpress" target="_blank">
-        <button>Sign up</button>
-    </a><br/>
-
-<p>First of all you should open <a href="http://bit.ly/profitbutton-wordpress" target="_blank">http://admin.probtn.com</a> and enter (or sign up if you havn't account).</p>
-    <img alt="step1" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step1.png'); ?>"/>
-    <p>After your sign in, you can see "create" button in left sidebar.</p>
-    <img alt="step2" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step2.png'); ?>"/>
-    <p></p>
-    <img alt="step3" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step3.png'); ?>"/>
-    <img alt="step4" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step4.png'); ?>"/>
-    <img alt="step5" style="width: 90%; height: auto;" src="<?php echo plugins_url('/profit-button/images/step5.png'); ?>"/>
-</div>
-</div>
-
-</div>
-</div>
-
-
-
-
-<div class="postbox-container" id="main-container" style="width:24%;">
-                            <div id="left-sortables" class="meta-box-sortables ui-sortable"><div id="dashboard_right_now" class="postbox ">
-<div class="handlediv" title="Нажмите, чтобы переключить"><br></div>
-<h3 class="hndle"><span>Video</span></h3>
-<div class="inside" style="padding-top: 0px !important;">
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-
-</div>
-</div>
-</div>
-</div>-->
-
-</div>
-
 <?php
 }
 ?>
