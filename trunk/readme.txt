@@ -19,8 +19,9 @@ Functionality is implemented like floating button above your site, and after cli
 For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.
 
 Examples:
+
 * [Floating button used in donations](http://thecall.imakefilms.tv "thecall.imakefilms.tv")
-* [Floating button used as a contact form](iaddicshelters.net "iaddicshelters.net")
+* [Floating button used as a contact form](http://iaddicshelters.net "iaddicshelters.net")
 
 == Installation ==
 
@@ -61,6 +62,13 @@ You can change Content Size only if you are using probtn.com as Button settings 
 and you have already created an account and application on admin.probtn.com
 Open your application and scroll down to Button Settings box.
 There you find Content Size W(idth) and H(eight) settings. These values are set in pixels.
+
+= How to make button visible if it is being opened in iframe or through another button =
+
+By default when a button is viewed via another button or iframe, it is hidden to prevent recursion.
+You can change this option only if you are using full account (signed up on admin.probtn.com).
+In this case, open your application, scroll down to "Button settings" box, open "Fine tuning tab" and search for "Hide in frame" parameter.
+Change its value to "false" and click Save.
 
 == Screenshots ==
 
