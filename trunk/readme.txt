@@ -20,8 +20,8 @@ For better usability users can use admin panel with settings and button targetin
 
 Examples:
 
-* [Floating button used in donations](http://thecall.imakefilms.tv "thecall.imakefilms.tv")
-* [Floating button used as a contact form](http://iaddicshelters.net "iaddicshelters.net")
+  * [Floating button used in donations](http://thecall.imakefilms.tv "thecall.imakefilms.tv")
+  * [Floating button used as a contact form](http://iaddicshelters.net "iaddicshelters.net")
 
 == Installation ==
 
