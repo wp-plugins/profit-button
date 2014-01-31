@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.6
+Stable tag: 1.7
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -67,9 +67,11 @@ Added base functionality of floating button.
 
 **v1.6** Redesign of settings menu
 
+**v1.7** Hide button if shown inside another button
+
 == Upgrade notice ==
 
-Added automatic account creation on probtn.com and redesign of settings menu
+Added automatic account creation on probtn.com and redesign of settings menu. Hide button if shown inside another button.
 
 == Arbitrary section 1 ==
 
