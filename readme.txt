@@ -19,6 +19,7 @@ Functionality is implemented like floating button above your site, and after cli
 For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.
 
 Examples:
+
   * [Floating button used in donations](http://thecall.imakefilms.tv "thecall.imakefilms.tv")
   * [Floating button used as a contact form](http://iaddicshelters.net "iaddicshelters.net")
 
