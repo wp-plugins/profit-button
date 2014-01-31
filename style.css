@@ -1,5 +1,5 @@
-html, body { 
-	height: 100%; 
+html, body {
+	height: 100%;
 }
 body {
     /*overflow: auto !important;*/
@@ -21,7 +21,7 @@ body {
 }
 
 .pizzabtn_button {
-    
+
 	background: transparent !important; /*url('PizzaBtn/Images/gray.png') no-repeat !important;*/
 }
 
@@ -37,12 +37,13 @@ body {
     z-index: 500 !important;
 }
 
-body { 
-	margin: 0; 
+body {
+	margin: 0;
 }
 #pizzabtn img {
     margin: 0 auto;
     display: block;
+    cursor: pointer;
 }
 #pizzabtn #hintText, #pizzabtn_wrapper #hintText {
     clear: both;
