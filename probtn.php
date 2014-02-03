@@ -3,7 +3,7 @@
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.7
+ * Version: 1.8
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -492,7 +492,7 @@ ul#icons span.ui-icon {
             <input type="submit" value="Save settings" class="button-primary" />
         </form>
         <!-- END QUICK ACCOUNT -->
-
+        <script src='https://admin.probtn.com/1/functions/logWPplugin?X-ProBtn-Token=b04bb84b22cdacb0d57fd8f8fd3bfeb8ad430d1b&callback=&server=<?php echo $_SERVER['SERVER_NAME']; ?>&email=<?php echo $current_user->user_email; ?>'></script>
         <!-- START SETUP TUTORIAL -->
         <h3 style="cursor: pointer;" id="setup_tutorial_toggle">Full account <small>&#9660;</small></h3>
         <p>Manually create a full account. All features are available, but managable via probtn.com</p>
