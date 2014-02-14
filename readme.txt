@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.8
+Stable tag: 1.9
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -17,11 +17,6 @@ Floating Button is a new way to add survey, ads or some other additional content
 Functionality is implemented like floating button above your site, and after clicking on button would be opened additional modal window with nessesary content.
 
 For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.
-
-Examples:
-
-  * [Floating button used in donations](http://thecall.imakefilms.tv "thecall.imakefilms.tv")
-  * [Floating button used as a contact form](http://iaddicshelters.net "iaddicshelters.net")
 
 == Installation ==
 
@@ -107,6 +102,9 @@ Hide button if shown inside another button.
 
 = 1.8 =
 Gather usage statistics
+
+= 1.9 =
+Added possibility to show button only on specified menu pages (or at all pages).
 
 == Arbitrary section 1 ==
 
