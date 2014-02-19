@@ -3,7 +3,7 @@
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9
+ * Version: 1.9.1
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -20,25 +20,24 @@ We need to find current menu item and
 */
 function wpse16243_wp_nav_menu_objects( $sorted_menu_items )
 {
-    foreach ( $sorted_menu_items as $menu_item ) {
-        if ( $menu_item->current ) {
-            $GLOBALS['menu_id'] = $menu_item->ID;
-
-            $menu_options = get_option( 'probtn_menu_settings' );
-            $options = get_option( 'probtn_settings' );
-            if ((isset($options['menu_show'])) && ($options['menu_show']=='on')) {
-                foreach ($menu_options as $key=>$val) {
-                    if (($val==$menu_item->ID) || ($val=="on")) {
-                        start_button_script();
-                        break;
-                    };
-                } 
-            } else {
-                start_button_script();
-            }           
-            break;
-        }
-    }
+		foreach ( $sorted_menu_items as $menu_item ) {
+			if ( $menu_item->current ) {
+                    $menu_options = get_option( 'probtn_menu_settings' );
+                    $options = get_option( 'probtn_settings' );
+				    if ((isset($options['menu_show'])) && ($options['menu_show']=='on')) {
+					    foreach ($menu_options as $key=>$val) {
+						    if (($val==$menu_item->ID) || ($val=="on")) {
+							    start_button_script();
+							    break;
+						    };
+					    }
+                    }
+                    //else {
+                        //start_button_script();
+                    //};
+				break;
+			};
+		};
     return $sorted_menu_items;
 }
 
@@ -46,17 +45,6 @@ function wpse16243_wp_nav_menu_objects( $sorted_menu_items )
  * Enqueue plugin style-file
  */
 function probtn_add_my_stylesheet() {
-    /*echo "<pre>";
-    $locations = get_terms( 'nav_menu', array( 'hide_empty' => true ) );
-    print_r($locations);
-    foreach ($locations as $menu) {
-        $items = wp_get_nav_menu_items($menu->slug);
-        print_r($items);
-    };   
-    print_r($GLOBALS);
-    echo "</pre>";
-    */
-
     // Respects SSL, Style.css is relative to the current file
     wp_register_style( 'probtn-style', 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
     wp_enqueue_style( 'probtn-style' );
@@ -73,7 +61,11 @@ function probtn_add_my_stylesheet() {
     //$jqueryPepPath = parse_url(plugins_url('libs/jquery.pep.min.js', __FILE__));
     $jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
 
-    //start_button_script();
+    $options = get_option( 'probtn_settings' ); 
+	if ((isset($options['menu_show'])) && ($options['menu_show']=='on')) {
+	} else {
+		start_button_script();
+	};
 }
 
 function start_button_script() {
@@ -554,7 +546,7 @@ ul#icons span.ui-icon {
                 $options = get_option( 'probtn_settings' );
                 //print_r($menu_options);
             ?> 
-           <input type="checkbox" name="probtn_settings[menu_show]" value="on" <?php checked( 'on' == $options[$menu->slug."_all"]); ?> />
+           <input type="checkbox" name="probtn_settings[menu_show]" value="on" <?php checked( 'on' == $options["menu_show"]); ?> />
                 <span>Show button only at selected menu pages</span><br/>
            <br/>
            <input type="submit" value="Save" class="button-primary"/>
