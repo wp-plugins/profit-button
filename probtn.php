@@ -3,7 +3,7 @@
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9.1
+ * Version: 1.9.2
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -49,17 +49,15 @@ function probtn_add_my_stylesheet() {
     wp_register_style( 'probtn-style', 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
     wp_enqueue_style( 'probtn-style' );
 
-    wp_register_script( 'probtn-script', 'https://pizzabtn.herokuapp.com/javascripts/probtn.js', array( 'jquery' ));
-    //wp_register_script( 'probtn-script', plugins_url('probtn.js', __FILE__), array( 'jquery' ));
-    wp_enqueue_script( 'probtn-script' );
-
-    //wp_register_script( 'jquerypep-script', plugins_url('https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js', __FILE__) );
     wp_register_script( 'jquerypep-script', 'https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js', array( 'jquery' ));
     wp_enqueue_script( 'jquerypep-script' );
 
     $mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
-    //$jqueryPepPath = parse_url(plugins_url('libs/jquery.pep.min.js', __FILE__));
     $jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
+
+    wp_register_script( 'probtn-script', 'https://pizzabtn.herokuapp.com/javascripts/probtn.js', array( 'jquery', 'jquerypep-script' ));
+    //wp_register_script( 'probtn-script', plugins_url('probtn.js', __FILE__), array( 'jquery' ));
+    wp_enqueue_script( 'probtn-script' );
 
     $options = get_option( 'probtn_settings' ); 
 	if ((isset($options['menu_show'])) && ($options['menu_show']=='on')) {
