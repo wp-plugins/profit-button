@@ -61,9 +61,3 @@ function FloatingButtonFunc() {
 	    });
     });
 }
-
-/*
-<?php
-  print_r($_GET);
-?>
-*/

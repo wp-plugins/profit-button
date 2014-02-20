@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -108,6 +108,9 @@ Added possibility to show button only on specified menu pages (or at all pages).
 
 = 1.9.1 =
 Fixed issue - button isn't showing on site which hasn't menu
+
+= 1.9.2 =
+Updated order of the scripts (dependence of probtn.js from jquery.pep.js) 
 
 == Arbitrary section 1 ==
 
