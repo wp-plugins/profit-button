@@ -36,9 +36,14 @@ function runYourFunctionWhenJQueryIsLoaded() {
     }
 }
 
-function FloatingButtonFunc() {
+function FloatingButtonFunc() {    
     jQuery(document).ready(function() {
-	    jQuery(document).StartButton({
+        setTimeout(InitButton, 2500);
+    });
+}
+
+function InitButton() {
+    jQuery(document).StartButton({
 		    "mainStyleCss": "https://pizzabtn.herokuapp.com/stylesheets/probtn.css",
             <?php
             if ($source==1) {
@@ -59,5 +64,4 @@ function FloatingButtonFunc() {
             }
             ?>
 	    });
-    });
 }
