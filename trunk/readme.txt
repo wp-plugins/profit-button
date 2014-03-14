@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -74,6 +74,9 @@ Change its value to "false" and click Save.
 
 
 == Changelog ==
+
+= 1.9.4 =
+Menu settings are shown and for local, and for remote settings.
 
 = 1.9.3 =
 Added timeout before button would be shown to prevent some conflicts with other users plugins.
