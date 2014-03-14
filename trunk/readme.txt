@@ -75,42 +75,39 @@ Change its value to "false" and click Save.
 
 == Changelog ==
 
-Added base functionality of floating button.
+= 1.9.3 =
+Added timeout before button would be shown to prevent some conflicts with other users plugins.
 
-= 1.5 =
-Added automatic account creation on probtn.com
-
-= 1.6 =
-Redesign of settings menu
-
-= 1.7 =
-Hide button if shown inside another button
-
-= 1.8 =
-Gather usage statistics
-
-== Upgrade notice ==
-
-= 1.5 =
-Added automatic account creation on probtn.com
-
-= 1.6 =
-Redesign of settings menu
-
-= 1.7 =
-Hide button if shown inside another button.
-
-= 1.8 =
-Gather usage statistics
-
-= 1.9 =
-Added possibility to show button only on specified menu pages (or at all pages).
+= 1.9.2 =
+Updated order of the scripts (dependence of probtn.js from jquery.pep.js) 
 
 = 1.9.1 =
 Fixed issue - button isn't showing on site which hasn't menu
 
-= 1.9.2 =
-Updated order of the scripts (dependence of probtn.js from jquery.pep.js) 
+= 1.9 =
+Added possibility to show button only on specified menu pages (or at all pages).
+
+= 1.8 =
+Gather usage statistics
+
+= 1.7 =
+Hide button if shown inside another button.
+
+= 1.6 =
+Redesign of settings menu
+
+= 1.5 =
+Added automatic account creation on probtn.com
+
+Added base functionality of floating button.
+
+== Upgrade notice ==
+
+= 1.6 =
+Redesign of settings menu
+
+= 1.5 =
+Added automatic account creation on probtn.com
 
 == Arbitrary section 1 ==
 
