@@ -77,6 +77,70 @@ function start_button_script() {
     wp_enqueue_script( 'probtn-start-script' );
 }
 
+function probtninit_function() {
+    $options = get_option( 'probtn_settings' );
+    if (($options['state']==null) || ($options['state']=='')) {
+        $options['state'] = 'on';
+    };
+    if (($options['probtn_image']==null) || ($options['probtn_image']=='')) {
+        $options['probtn_image'] = 'http://admin.probtn.com/eqwid_btn_nonpress.png';
+    };
+    if (($options['source']==null) || ($options['source']=='')) {
+        $options['source'] = 'probtn.com';
+        $source = 1;
+    } else {
+        $source = 0;
+    }
+
+    $mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
+    $jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
+
+    if ($options['state']=="off") {
+$output = '
+<script>
+FloatingButtonFunc();
+
+function runYourFunctionWhenJQueryIsLoaded() {
+    if (window.$){
+        FloatingButtonFunc();
+    } else {
+        setTimeout(runYourFunctionWhenJQueryIsLoaded, 50);
+    }
+}
+
+function FloatingButtonFunc() {    
+    jQuery(document).ready(function() {
+        setTimeout(InitButton, 2500);
+    });
+}
+
+function InitButton() {
+    jQuery(document).StartButton({
+		    "mainStyleCss": "https://pizzabtn.herokuapp.com/stylesheets/probtn.css",
+            ';
+            if ($source==1) {
+                $output = $output. '
+                "jqueryPepPath": ""jqueryPepPath": "'.$jqueryPepPath["path"].'",
+                "ButtonImage": "'.$options['probtn_image'].'",
+                "ButtonDragImage": "'.$options['probtn_image'].'",
+                "ButtonOpenImage": "'.$options['probtn_image'].'",
+                "ButtonInactiveImage": "http://localhost:55737/",
+                "domain": "wordpress.plugin",
+                "ContentURL": "'.$options['probtn_contenturl'].'",
+                "HintText",": "'.$options['probtn_hinttext'].'"
+                ';
+            } else {
+                $output = $output. '"jqueryPepPath": "'.$jqueryPepPath["path"].'"';
+            }
+             $output = $output. '}); } </script>';
+            return $output;
+	    } else {
+	        return "";
+	    }
+}
+
+add_shortcode('floating_button', 'probtninit_function');
+
 add_action('admin_init', 'probtn_register_settings');
 
 function probtn_register_settings(){
@@ -235,7 +299,8 @@ ul#icons span.ui-icon {
         <p>
         Floating button is a new way to add survey, ads or some other additional content without adding any changes to your design.<br/>
         Functionality is implemented like floating button above your site, and after clicking on button would be opened additional modal window with nessesary content.<br/>
-        For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.
+        For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.<br/>
+        Shortcode to insert plugin - <strong><i>[floating_button]</i></strong>
         </p>
     </div>
 

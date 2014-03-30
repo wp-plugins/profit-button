@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.9.4
+Stable tag: 1.9.5
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -17,6 +17,8 @@ Floating Button is a new way to add survey, ads or some other additional content
 Functionality is implemented like floating button above your site, and after clicking on button would be opened additional modal window with nessesary content.
 
 For better usability users can use admin panel with settings and button targeting, and also some detailed statistics and analytics.
+
+Shortcode to insert plugin - [floating_button]
 
 == Installation ==
 
@@ -65,6 +67,10 @@ You can change this option only if you are using full account (signed up on admi
 In this case, open your application, scroll down to "Button settings" box, open "Fine tuning tab" and search for "Hide in frame" parameter.
 Change its value to "false" and click Save.
 
+= How to show button only on some nessesary pages? =
+
+You need to set "Button state" to off and add shortcode [floating_button] at nessesary pages, where you'd like to see button.
+
 == Screenshots ==
 
 1. Gif example
@@ -74,6 +80,9 @@ Change its value to "false" and click Save.
 
 
 == Changelog ==
+
+= 1.9.5 =
+Added shortcode [floating_button] (require button state set to off) to add button only on nessesary pages.
 
 = 1.9.4 =
 Menu settings are shown and for local, and for remote settings.
