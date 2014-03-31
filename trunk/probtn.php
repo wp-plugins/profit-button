@@ -3,7 +3,7 @@
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9.5
+ * Version: 1.9.6
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -120,14 +120,14 @@ function InitButton() {
             ';
             if ($source==1) {
                 $output = $output. '
-                "jqueryPepPath": ""jqueryPepPath": "'.$jqueryPepPath["path"].'",
+                "jqueryPepPath": "'.$jqueryPepPath["path"].'",
                 "ButtonImage": "'.$options['probtn_image'].'",
                 "ButtonDragImage": "'.$options['probtn_image'].'",
                 "ButtonOpenImage": "'.$options['probtn_image'].'",
-                "ButtonInactiveImage": "http://localhost:55737/",
+                "ButtonInactiveImage": "'.$options['probtn_image'].'",
                 "domain": "wordpress.plugin",
                 "ContentURL": "'.$options['probtn_contenturl'].'",
-                "HintText",": "'.$options['probtn_hinttext'].'"
+                "HintText": "'.$options['probtn_hinttext'].'"
                 ';
             } else {
                 $output = $output. '"jqueryPepPath": "'.$jqueryPepPath["path"].'"';
