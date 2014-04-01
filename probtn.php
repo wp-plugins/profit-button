@@ -3,7 +3,7 @@
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9.6
+ * Version: 1.9.7
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -52,8 +52,11 @@ function probtn_add_my_stylesheet() {
     wp_register_script( 'jquerypep-script', 'https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js', array( 'jquery' ));
     wp_enqueue_script( 'jquerypep-script' );
 
-    $mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
-    $jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
+    //$mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
+    $mainStyleCss = 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css';
+    //$jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
+    //print_r($jqueryPepPath);
+    $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
 
     wp_register_script( 'probtn-script', 'https://pizzabtn.herokuapp.com/javascripts/probtn.js', array( 'jquery', 'jquerypep-script' ));
     //wp_register_script( 'probtn-script', plugins_url('probtn.js', __FILE__), array( 'jquery' ));
@@ -67,13 +70,17 @@ function probtn_add_my_stylesheet() {
 }
 
 function start_button_script() {
+
+    $mainStyleCss = 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css';
+    $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
+
     $options = get_option( 'probtn_settings' );
     function urlify($key, $val) {
         return urlencode($key) . '=' . urlencode($val);
     }
     $url = '';
     $url .= implode('&amp;', array_map('urlify', array_keys($options), $options));
-    wp_register_script( 'probtn-start-script', plugins_url("start_probtn.php?mainStyleCss=".$mainStyleCss["path"]."&jqueryPepPath=".$jqueryPepPath["path"]."&".$url, __FILE__), array( 'jquery' ) );
+    wp_register_script( 'probtn-start-script', plugins_url("start_probtn.php?mainStyleCss=".$mainStyleCss."&jqueryPepPath=".$jqueryPepPath."&".$url, __FILE__), array( 'jquery' ) );
     wp_enqueue_script( 'probtn-start-script' );
 }
 
@@ -92,8 +99,10 @@ function probtninit_function() {
         $source = 0;
     }
 
-    $mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
-    $jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
+    //$mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
+    //$jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
+    $mainStyleCss = 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css';
+    $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
 
     if ($options['state']=="off") {
 $output = '
@@ -120,7 +129,7 @@ function InitButton() {
             ';
             if ($source==1) {
                 $output = $output. '
-                "jqueryPepPath": "'.$jqueryPepPath["path"].'",
+                "jqueryPepPath": "'.$jqueryPepPath.'",
                 "ButtonImage": "'.$options['probtn_image'].'",
                 "ButtonDragImage": "'.$options['probtn_image'].'",
                 "ButtonOpenImage": "'.$options['probtn_image'].'",
@@ -130,7 +139,7 @@ function InitButton() {
                 "HintText": "'.$options['probtn_hinttext'].'"
                 ';
             } else {
-                $output = $output. '"jqueryPepPath": "'.$jqueryPepPath["path"].'"';
+                $output = $output. '"jqueryPepPath": "'.$jqueryPepPath.'"';
             }
              $output = $output. '}); } </script>';
             return $output;
