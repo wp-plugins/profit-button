@@ -4,7 +4,7 @@ Donate link: -
 Tags: widget, profit button, floating button, interctive element, custom, plugin, servey, advertising, monetization, probtn, button, feedback, analytics, vote, voting, content, feed, marketing
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.9.6
+Stable tag: 1.9.7
 License: Licenced under LGPL
 License URI: http://opensource.org/licenses/LGPL-3.0
 
@@ -80,6 +80,9 @@ You need to set "Button state" to off and add shortcode [floating_button] at nes
 
 
 == Changelog ==
+
+= 1.9.7=
+Fixed jquery.pep.js path for start_button init script
 
 = 1.9.6 =
 Fixed shortcode problems - [floating_button]
