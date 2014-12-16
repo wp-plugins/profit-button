@@ -44,7 +44,7 @@ function FloatingButtonFunc() {
 
 function InitButton() {
     jQuery(document).StartButton({
-		    "mainStyleCss": "https://pizzabtn.herokuapp.com/stylesheets/probtn.css",
+		    "mainStyleCss": "//cdn.probtn.com/style.css",
             <?php
             if ($source==1) {
             ?>
