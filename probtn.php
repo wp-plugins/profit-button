@@ -6,7 +6,7 @@ error_reporting(E_ERROR);
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9.8
+ * Version: 1.9.7
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -205,7 +205,7 @@ function probtn_options() {
     }
     ?>
 
-<script src="http://yandex.st/jquery/form/3.14/jquery.form.min.js"></script>
+<script src="//yandex.st/jquery/form/3.14/jquery.form.min.js"></script>
 
 <style>
     #wpfooter {
