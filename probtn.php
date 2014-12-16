@@ -6,7 +6,7 @@ error_reporting(E_ERROR);
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9.7
+ * Version: 1.9.9
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -49,19 +49,17 @@ function wpse16243_wp_nav_menu_objects( $sorted_menu_items )
  */
 function probtn_add_my_stylesheet() {
     // Respects SSL, Style.css is relative to the current file
-    wp_register_style( 'probtn-style', 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
+    wp_register_style( 'probtn-style', '//cdn.probtn.com/style.css');
     wp_enqueue_style( 'probtn-style' );
 
-    wp_register_script( 'jquerypep-script', 'https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js', array( 'jquery' ));
+    wp_register_script( 'jquerypep-script', '//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js', array( 'jquery' ));
     wp_enqueue_script( 'jquerypep-script' );
 
-    //$mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
-    $mainStyleCss = 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css';
-    //$jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
-    //print_r($jqueryPepPath);
-    $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
+    $mainStyleCss = '//cdn.probtn.com/style.css';
 
-    wp_register_script( 'probtn-script', 'https://pizzabtn.herokuapp.com/javascripts/probtn.js', array( 'jquery', 'jquerypep-script' ));
+    $jqueryPepPath = "//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js";
+
+    wp_register_script( 'probtn-script', '//cdn.probtn.com/probtn.js', array( 'jquery', 'jquerypep-script' ));
     //wp_register_script( 'probtn-script', plugins_url('probtn.js', __FILE__), array( 'jquery' ));
     wp_enqueue_script( 'probtn-script' );
 
@@ -74,8 +72,8 @@ function probtn_add_my_stylesheet() {
 
 function start_button_script() {
 
-    $mainStyleCss = 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css';
-    $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
+    $mainStyleCss = '//cdn.probtn.com/style.css';
+    $jqueryPepPath = "//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js";
 
     $options = get_option( 'probtn_settings' );
     function urlify($key, $val) {
@@ -95,7 +93,7 @@ function probtninit_function() {
         $options['state'] = 'on';
     };
     if (($options['probtn_image']==null) || ($options['probtn_image']=='')) {
-        $options['probtn_image'] = 'http://admin.probtn.com/eqwid_btn_nonpress.png';
+        $options['probtn_image'] = '//cdnjs.cloudflare.com/ajax/libs/probtn/1.0.0/images/probtn/gray.png';
     };
     if (($options['source']==null) || ($options['source']=='')) {
         $options['source'] = 'probtn.com';
@@ -104,10 +102,8 @@ function probtninit_function() {
         $source = 0;
     }
 
-    //$mainStyleCss = parse_url('https://pizzabtn.herokuapp.com/stylesheets/probtn.css');
-    //$jqueryPepPath = parse_url("https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js");
-    $mainStyleCss = 'https://pizzabtn.herokuapp.com/stylesheets/probtn.css';
-    $jqueryPepPath = "https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js";
+    $mainStyleCss = '//cdn.probtn.com/style.css';
+    $jqueryPepPath = "//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js";
 
     if ($options['state']=="off") {
 $output = '
@@ -130,7 +126,7 @@ function FloatingButtonFunc() {
 
 function InitButton() {
     jQuery(document).StartButton({
-		    "mainStyleCss": "https://pizzabtn.herokuapp.com/stylesheets/probtn.css",
+		    "mainStyleCss": "//cdn.probtn.com/style.css",
             ';
             if ($source==1) {
                 $output = $output. '
@@ -531,9 +527,9 @@ ul#icons span.ui-icon {
 
 
     <!-- START LAUNCH DEMO BUTTON -->
-    <script src='https://pizzabtn.herokuapp.com/javascripts/jquery.pep.min.js'></script>
-    <script src='https://pizzabtn.herokuapp.com/javascripts/jquery.fancybox.js'></script>
-    <script src='https://pizzabtn.herokuapp.com/javascripts/probtn.js'></script>
+    <script src='//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js'></script>
+    <script src='//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.js'></script>
+    <script src='//cdn.probtn.com/probtn.js'></script>
     <script>
         jQuery(document).ready(
         function ($) {
@@ -547,7 +543,7 @@ ul#icons span.ui-icon {
             });
             $(document).StartButton({
                 'domain': 'example.com',
-                'mainStyleCss':'https://pizzabtn.herokuapp.com/stylesheets/probtn.css'
+                'mainStyleCss':'//cdn.probtn.com/style.css'
             });
         });
     </script>
@@ -635,7 +631,7 @@ ul#icons span.ui-icon {
                         <fieldset>
                             <label>
                                 <input required="required" name="settings_pic" type="text" id="settings_pic"
-                                value="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png" placeholder="http://example.com/example.png"/>
+                                value="//cdnjs.cloudflare.com/ajax/libs/probtn/1.0.0/images/probtn/gray.png" placeholder="http://example.com/example.png"/>
                                 <br />
                                 <span class="description">Please enter button image.</span>
                             </label>
