@@ -6,7 +6,7 @@ error_reporting(E_ERROR);
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9.9
+ * Version: 1.9.10
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -672,7 +672,7 @@ ul#icons span.ui-icon {
         <!--<p>Manually create a full account. All features are available, but managable via probtn.com</p>-->
         <p>Provide full customization options. You need to register on 
             <a href="https://admin.probtn.com/login/new" target="_blank">the main site</a></p>
-        <p><strong>Note:</strong> to upgrade from an existing quick account to full account, open <a href="https://admin/probtn.com/login" target="_blank">login page</a> and request password recovery for quick account's email.</p>
+        <p><strong>Note:</strong> to upgrade from an existing quick account to full account, open <a href="https://admin.probtn.com/login" target="_blank">login page</a> and request password recovery for quick account's email.</p>
         <script>
             jQuery(document).ready(
             function ($) {
