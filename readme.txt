@@ -81,6 +81,9 @@ You need to set "Button state" to off and add shortcode [floating_button] at nes
 
 == Changelog ==
 
+= 1.9.11=
+Updated init button script
+
 = 1.9.10=
 Fixed address in description
 
