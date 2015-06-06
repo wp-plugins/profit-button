@@ -6,7 +6,7 @@ error_reporting(E_ERROR);
  * Plugin Name: Floating Button
  * Plugin URI: http://probtn.com
  * Description: Floating Button is an interactive element that used to show custom content inside your application. If the button is tapped then the popup with Browser would open. The url in the Browser is set using settings on our server.
- * Version: 1.9.10
+ * Version: 1.9.11
  * Author: hintsolutions
  * Author URI: http://probtn.com
  * License: -
@@ -52,12 +52,11 @@ function probtn_add_my_stylesheet() {
     wp_register_style( 'probtn-style', '//cdn.probtn.com/style.css');
     wp_enqueue_style( 'probtn-style' );
 
-    wp_register_script( 'jquerypep-script', '//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js', array( 'jquery' ));
+    wp_register_script( 'jquerypep-script', '//cdn.probtn.com/libs/jquery.pep.min.js', array( 'jquery' ));
     wp_enqueue_script( 'jquerypep-script' );
 
     $mainStyleCss = '//cdn.probtn.com/style.css';
-
-    $jqueryPepPath = "//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js";
+    $jqueryPepPath = "//cdn.probtn.com/libs/jquery.pep.min.js";
 
     wp_register_script( 'probtn-script', '//cdn.probtn.com/probtn.js', array( 'jquery', 'jquerypep-script' ));
     //wp_register_script( 'probtn-script', plugins_url('probtn.js', __FILE__), array( 'jquery' ));
@@ -73,7 +72,7 @@ function probtn_add_my_stylesheet() {
 function start_button_script() {
 
     $mainStyleCss = '//cdn.probtn.com/style.css';
-    $jqueryPepPath = "//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js";
+    $jqueryPepPath = "//cdn.probtn.com/libs/jquery.pep.min.js";
 
     $options = get_option( 'probtn_settings' );
     function urlify($key, $val) {
@@ -103,46 +102,21 @@ function probtninit_function() {
     }
 
     $mainStyleCss = '//cdn.probtn.com/style.css';
-    $jqueryPepPath = "//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js";
+    $jqueryPepPath = "//cdn.probtn.com/libs/jquery.pep.min.js";
 
     if ($options['state']=="off") {
-$output = '
-<script>
-FloatingButtonFunc();
 
-function runYourFunctionWhenJQueryIsLoaded() {
-    if (window.$){
-        FloatingButtonFunc();
-    } else {
-        setTimeout(runYourFunctionWhenJQueryIsLoaded, 50);
-    }
-}
+            $mainStyleCss = '//cdn.probtn.com/style.css';
+            $jqueryPepPath = "//cdn.probtn.com/libs/jquery.pep.min.js";
 
-function FloatingButtonFunc() {    
-    jQuery(document).ready(function() {
-        setTimeout(InitButton, 2500);
-    });
-}
+            $url = '';
+            if (gettype($options)=="array") {
+                $options2 = $options;
+                $options2['state'] = 'on';
+                $url .= implode('&amp;', array_map('urlify', array_keys($options2), $options2));
+            };
+            $output = "<script src='".plugins_url("start_probtn.php?mainStyleCss=".$mainStyleCss."&jqueryPepPath=".$jqueryPepPath."&".$url, __FILE__)."'></script>";
 
-function InitButton() {
-    jQuery(document).StartButton({
-		    "mainStyleCss": "//cdn.probtn.com/style.css",
-            ';
-            if ($source==1) {
-                $output = $output. '
-                "jqueryPepPath": "'.$jqueryPepPath.'",
-                "ButtonImage": "'.$options['probtn_image'].'",
-                "ButtonDragImage": "'.$options['probtn_image'].'",
-                "ButtonOpenImage": "'.$options['probtn_image'].'",
-                "ButtonInactiveImage": "'.$options['probtn_image'].'",
-                "domain": "wordpress.plugin",
-                "ContentURL": "'.$options['probtn_contenturl'].'",
-                "HintText": "'.$options['probtn_hinttext'].'"
-                ';
-            } else {
-                $output = $output. '"jqueryPepPath": "'.$jqueryPepPath.'"';
-            }
-             $output = $output. '}); } </script>';
             return $output;
 	    } else {
 	        return "";
@@ -209,91 +183,91 @@ function probtn_options() {
     }
 
     .mp6-sg-example {
-    padding: 1em;
-    margin: 10px 0 20px;
-    background: white;
+        padding: 1em;
+        margin: 10px 0 20px;
+        background: white;
 
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
-    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
-}
+        -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+        box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+    }
 
-.mp6-sg-example h3 {
-    margin-top: 0;
-}
+    .mp6-sg-example h3 {
+        margin-top: 0;
+    }
 
-.mp6-table {
-    width: 100%;
-}
+    .mp6-table {
+        width: 100%;
+    }
 
-.mp6-table th, .mp6-table td {
-    border-bottom: 1px solid #eee;
-}
+    .mp6-table th, .mp6-table td {
+        border-bottom: 1px solid #eee;
+    }
 
-.mp6-table .sg-example-code {
-    width: 25%;
-}
-.mp6-table .sg-example-descrip {
-    width: 75%;
-}
+    .mp6-table .sg-example-code {
+        width: 25%;
+    }
+    .mp6-table .sg-example-descrip {
+        width: 75%;
+    }
 
-.mp6-table td span {
-    display: block;
-    padding: 5px 10px;
-}
+    .mp6-table td span {
+        display: block;
+        padding: 5px 10px;
+    }
 
-/*jQuery UI demo page css*/
-.demoHeaders {
-    margin-top: 2em;
-    clear: both;
-}
-#dialog_link {
-    padding: .4em 1em .4em 20px;
-    text-decoration: none;
-    position: relative;
-}
-#dialog_link span.ui-icon {
-    margin: 0 5px 0 0;
-    position: absolute;
-    left: .2em;
-    top: 50%;
-    margin-top: -8px;
-}
-ul#icons {
-    margin: 0;
-    padding: 0
-}
-ul#icons li {
-    margin: 2px;
-    position: relative;
-    padding: 4px 0;
-    cursor: pointer;
-    float: left;
-    list-style: none;
-}
-ul#icons span.ui-icon {
-    float: left;
-    margin: 0 4px
-}
-.columnbox {
-    height: 150px;
-    width: 48%;
-    float:left;
-    margin-right: 1%;
-}
-#eq span {
-    height:120px;
-    float:left;
-    margin:15px;
- }
-.buttonset {
-    margin-bottom: 5px;
-}
-#toolbar {
-    padding: 10px 4px;
-}
-.ui-widget-overlay {
-    position: absolute;
-} /* fixed doesn't actually work? */
+    /*jQuery UI demo page css*/
+    .demoHeaders {
+        margin-top: 2em;
+        clear: both;
+    }
+    #dialog_link {
+        padding: .4em 1em .4em 20px;
+        text-decoration: none;
+        position: relative;
+    }
+    #dialog_link span.ui-icon {
+        margin: 0 5px 0 0;
+        position: absolute;
+        left: .2em;
+        top: 50%;
+        margin-top: -8px;
+    }
+    ul#icons {
+        margin: 0;
+        padding: 0
+    }
+    ul#icons li {
+        margin: 2px;
+        position: relative;
+        padding: 4px 0;
+        cursor: pointer;
+        float: left;
+        list-style: none;
+    }
+    ul#icons span.ui-icon {
+        float: left;
+        margin: 0 4px
+    }
+    .columnbox {
+        height: 150px;
+        width: 48%;
+        float:left;
+        margin-right: 1%;
+    }
+    #eq span {
+        height:120px;
+        float:left;
+        margin:15px;
+     }
+    .buttonset {
+        margin-bottom: 5px;
+    }
+    #toolbar {
+        padding: 10px 4px;
+    }
+    .ui-widget-overlay {
+        position: absolute;
+    } /* fixed doesn't actually work? */
 </style>
 
 <div class="wrap">
@@ -435,14 +409,14 @@ ul#icons span.ui-icon {
                                 <img alt="cart button" src="http://pizzabtn.herokuapp.com/Shop_button_grey_norm.png" width="50">
                                 &nbsp;&nbsp;
                                 <label class="radio inline">
-                                    <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png"<?php checked( 'http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png' == $options['probtn_image'] ); ?>/>
+                                    <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://admin.probtn.com/Chart_button_grey_norm.png"<?php checked( 'http://admin.probtn.com/Chart_button_grey_norm.png' == $options['probtn_image'] ); ?>/>
                                 </label>
-                                <img alt="grey button" src="http://itsbeta.com/en/wp-content/uploads/sites/3/2013/08/Chart_button_grey_norm.png" width="50">
+                                <img alt="grey button" src="http://admin.probtn.com/Chart_button_grey_norm.png" width="50">
                                 &nbsp;&nbsp;
                                 <label class="radio inline">
-                                    <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png"<?php checked( 'http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png' == $options['probtn_image'] ); ?>/>
+                                    <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://admin.probtn.com/Shop_button_pizza_norm.png"<?php checked( 'http://admin.probtn.com/Shop_button_pizza_norm.png' == $options['probtn_image'] ); ?>/>
                                 </label>
-                                <img alt="pizza button" src="http://itsbeta.com/wp-content/uploads/2013/08/Shop_button_pizza_norm.png" width="50">
+                                <img alt="pizza button" src="http://admin.probtn.com/Shop_button_pizza_norm.png" width="50">
                                 &nbsp;&nbsp;
                                 <label class="radio inline">
                                     <input onclick="" type="radio" name="probtn_settings[probtn_image]" value="http://admin.probtn.com/eqwid_btn_nonpress.png"<?php checked( 'http://admin.probtn.com/eqwid_btn_nonpress.png' == $options['probtn_image'] ); ?>/>
@@ -527,8 +501,8 @@ ul#icons span.ui-icon {
 
 
     <!-- START LAUNCH DEMO BUTTON -->
-    <script src='//cdn.jsdelivr.net/jquery.pep/0.6.3/jquery.pep.min.js'></script>
-    <script src='//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.js'></script>
+    <script src='//cdn.probtn.com/libs/jquery.pep.min.js'></script>
+    <script src='//cdn.probtn.com/libs/jquery.fancybox.min.js'></script>
     <script src='//cdn.probtn.com/probtn.js'></script>
     <script>
         jQuery(document).ready(
