@@ -40,7 +40,13 @@ function FloatingButtonFunc() {
     var useLocalFileSettings = false;
     var localSettingsPath = "settings.json";
     var isHPMD = false;
-    var domain = 'wordpress.plugin';
+    <?php 
+    if ($source==1) { ?>
+        var domain = 'wordpress.plugin';
+    <?php } else { ?>
+        var domain = document.domain.replace("www.", "");
+    <?php } ?>
+
     try {
         window.probtn_hpmd = hpmd;
     } catch(ex) {
